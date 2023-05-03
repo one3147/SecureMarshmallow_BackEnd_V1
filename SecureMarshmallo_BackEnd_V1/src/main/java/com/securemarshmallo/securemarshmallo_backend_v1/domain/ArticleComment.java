@@ -4,12 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import org.springframework.data.annotation.CreatedBy;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedBy;
-import org.springframework.data.annotation.LastModifiedDate;
 
-import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Getter
@@ -19,35 +14,26 @@ import java.util.Objects;
         @Index(columnList = "createdAt"),
         @Index(columnList = "createdBy")
 })
-@EntityListeners(EntityListeners.class)
 @Entity
-public class ArticleComment {
+public class ArticleComment extends AuditingFields {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @Setter @ManyToOne(optional = false) private  Article article;
-    @Setter @Column(nullable = false, length = 500) private String content;
 
+    @Setter
+    @ManyToOne(optional = false)
+    private Article article;
 
-    @CreatedDate
-    @Column(nullable = false) private LocalDateTime createdAt;
-    @CreatedBy
-    @Column(nullable = false, length = 100) private String createdBy;
-    @LastModifiedDate
-    @Column(nullable = false) private LocalDateTime modifiedAt;
-    @LastModifiedBy
-    @Column(nullable = false, length = 100) private String modifiedBy;
+    @Setter
+    @Column(nullable = false, length = 511)
+    private String content;
 
     protected ArticleComment() { }
 
-    private ArticleComment(Article article, String content) {
+    public ArticleComment(Article article, String content) {
         this.article = article;
         this.content = content;
-    }
-
-    public static ArticleComment of(Article article, String content) {
-        return new ArticleComment(article, content);
     }
 
     //동일설 검사 동등성 검사
