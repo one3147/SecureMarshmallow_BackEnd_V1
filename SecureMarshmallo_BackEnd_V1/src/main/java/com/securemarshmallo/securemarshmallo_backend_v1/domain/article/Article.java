@@ -1,4 +1,4 @@
-package com.securemarshmallo.securemarshmallo_backend_v1.domain;
+package com.securemarshmallo.securemarshmallo_backend_v1.domain.article;
 
 import jakarta.persistence.*;
 import lombok.Getter;
