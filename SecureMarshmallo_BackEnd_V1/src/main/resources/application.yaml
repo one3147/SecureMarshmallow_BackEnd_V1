@@ -26,6 +26,10 @@ spring:
         format_sql: true
         default_batch_fetch_size: 100
       sql.init.mode: always
+#  servlet:
+#    multipart:
+#      max-file-size: 8MB
+#      max-request-size: 8MB
 
 #  spring:
 #    config.activate.on-profile: testdb
